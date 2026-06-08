@@ -11,29 +11,17 @@ Problem Statement
 
 Many SAT students struggle because:
 
-1. Weak Vocabulary
+1. Weak Vocabulary: Students encounter hundreds of unfamiliar SAT-level words and often rely on memorization without understanding context.
 
-Students encounter hundreds of unfamiliar SAT-level words and often rely on memorization without understanding context.
+2. Boring Study Methods: Traditional flashcards and vocabulary lists feel repetitive and unmotivating.
 
-2. Boring Study Methods
+3. Lack of Context: Students memorize definitions but cannot recognize how words are used in actual SAT passages.
 
-Traditional flashcards and vocabulary lists feel repetitive and unmotivating.
+4. No Personalized Learning: Most study resources do not adapt to individual weaknesses.
 
-3. Lack of Context
+5. Inconsistent Practice: Students often skip study sessions due to busy schedules or low motivation.
 
-Students memorize definitions but cannot recognize how words are used in actual SAT passages.
-
-4. No Personalized Learning
-
-Most study resources do not adapt to individual weaknesses.
-
-5. Inconsistent Practice
-
-Students often skip study sessions due to busy schedules or low motivation.
-
-6. Studying Alone
-
-SAT preparation can feel isolating, reducing accountability and engagement.
+6. Studying Alone: SAT preparation can feel isolating, reducing accountability and engagement.
 
 Solution
 
@@ -52,28 +40,26 @@ Mobile devices
 Tablets
 Laptops
 Desktop computers
-How the App Works
-Step 1: Create Account
 
+How the App Works
+
+Step 1: Create Account
 Students create a free account and select their target SAT score.
 
 Step 2: Diagnostic Assessment
-
 A short placement test identifies strengths and weaknesses.
 
 Example:
-
 Vocabulary in Context
 Grammar Conventions
 Reading Comprehension
 Transition Words
 Sentence Structure
-Step 3: Personalized Learning Path
 
+Step 3: Personalized Learning Path
 The system generates a customized learning journey based on performance.
 
 Step 4: Complete Quests
-
 Students enter different learning arenas:
 
 Vocabulary Vault
@@ -100,6 +86,7 @@ Correct answer
 Explanation
 Common mistakes
 SAT strategy tips
+
 Step 6: Earn Rewards
 
 Students gain:
