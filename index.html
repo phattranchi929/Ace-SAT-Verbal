@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAT Verbal Quest — Bluebook Mastery Edition</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts for Modern Geometric Style -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  
+  <script>
+    // Custom Tailwind Configuration for Gen-Z Neo-Brutalist Theme
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Space Grotesk', 'system-ui', '-apple-system', 'sans-serif'],
+            display: ['Syne', 'sans-serif'],
+          },
+          colors: {
+            neoPurple: '#a855f7',
+            neoGreen: '#22c55e',
+            neoPink: '#ec4899',
+            neoCyan: '#06b6d4',
+            neoYellow: '#eab308',
+            darkBg: '#09090b',
+            darkCard: '#18181b',
+            darkBorder: '#27272a',
+            lightBg: '#f4f4f5',
+            lightCard: '#ffffff',
+            lightBorder: '#e4e4e7',
+          },
+          boxShadow: {
+            'brutal-sm': '3px 3px 0px 0px #000000',
+            'brutal': '6px 6px 0px 0px #000000',
+            'brutal-lg': '10px 10px 0px 0px #000000',
+            'brutal-neon': '6px 6px 0px 0px #a855f7',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Playful Animations & Custom Styling */
+    .shake {
+      animation: shakeAnim 0.4s ease-in-out;
+    }
+    @keyframes shakeAnim {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
+    }
+    .pop-scale {
+      animation: popScale 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes popScale {
+      0% { transform: scale(0.97); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    /* Scrollbars to match theme */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #a855f7;
+      border-radius: 5px;
+      border: 2px solid transparent;
+    }
+  </style>
+</head>
+<body class="bg-lightBg dark:bg-darkBg text-zinc-900 dark:text-zinc-100 min-h-screen transition-colors duration-300 font-sans antialiased p-4 md:p-8 flex items-center justify-center">
+
+  <!-- Core App Container (Spacious Landscape Panel) -->
+  <div id="app" class="w-full max-w-6xl min-h-[750px] flex flex-col md:flex-row border-4 border-black bg-lightBg dark:bg-darkBg relative shadow-brutal-lg rounded-2xl overflow-hidden">
+    
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="w-full md:w-64 bg-lightBg dark:bg-darkBg border-b-4 md:border-b-0 md:border-r-4 border-black p-6 flex flex-col justify-between shrink-0">
+      <div class="space-y-8">
+        <!-- Logo Header -->
+        <div class="flex items-center gap-3">
+          <div class="bg-neoPurple p-2 rounded-xl border-2 border-black shadow-brutal-sm">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"></path></svg>
+          </div>
+          <div>
+            <h1 class="font-display font-black text-xl tracking-tight uppercase leading-none">VERBAL QUEST</h1>
+            <span class="text-xs font-bold text-zinc-500 dark:text-zinc-400">DIGITAL SAT</span>
+          </div>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="space-y-3">
+          <!-- Home/Dashboard Tab -->
+          <button onclick="switchScreen('dashboard')" id="nav-btn-dashboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl border-2 border-black bg-neoPurple text-white shadow-brutal-sm transition-all font-black uppercase text-sm">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"></path></svg>
+            <span>Home</span>
+          </button>
+
+          <!-- Quest Arena Tab -->
+          <button onclick="switchScreen('arena')" id="nav-btn-arena" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl border-2 border-transparent text-zinc-500 dark:text-zinc-400 hover:border-black hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all font-black uppercase text-sm">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z"></path></svg>
+            <span>Arena</span>
+          </button>
+
+          <!-- Guild/Leaderboard Tab -->
+          <button onclick="switchScreen('leaderboard')" id="nav-btn-leaderboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl border-2 border-transparent text-zinc-500 dark:text-zinc-400 hover:border-black hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all font-black uppercase text-sm">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"></path></svg>
+            <span>Guilds</span>
+          </button>
+
+          <!-- Skill Tree Tab -->
+          <button onclick="switchScreen('stats')" id="nav-btn-stats" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl border-2 border-transparent text-zinc-500 dark:text-zinc-400 hover:border-black hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all font-black uppercase text-sm">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z"></path></svg>
+            <span>Skills</span>
+          </button>
+        </nav>
+      </div>
+
+      <!-- Quick stats/profile segment inside sidebar -->
+      <div class="mt-8 pt-6 border-t-2 border-zinc-200 dark:border-zinc-800 space-y-4">
+        <!-- Streak Indicator -->
+        <div class="flex items-center justify-between bg-neoYellow/20 dark:bg-neoYellow/10 text-neoYellow border-2 border-black px-3 py-2 rounded-xl text-xs font-black shadow-brutal-sm animate-pulse">
+          <span>⚡ STUDY STREAK</span>
+          <span class="bg-black text-neoYellow px-2 py-0.5 rounded border border-neoYellow text-xs"><span id="streak-count">5</span> DAYS</span>
+        </div>
+
+        <!-- Toggle Light/Dark Mode -->
+        <button id="theme-toggle" class="w-full bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 py-2 px-3 rounded-xl border-2 border-black shadow-brutal-sm flex items-center justify-between active:translate-y-0.5 active:shadow-none transition-all text-xs font-black">
+          <span>THEME VALUE</span>
+          <div class="flex items-center">
+            <!-- Sun Icon -->
+            <svg id="sun-icon" class="w-4 h-4 text-zinc-800 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 2.243a1 1 0 11-1.414 1.414L11.828 4.9a1 1 0 111.414-1.414l.758.757zm1.514 6.257a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zm-2.243 4.243a1 1 0 111.414-1.414l.757.758a1 1 0 11-1.414 1.414l-.757-.758zM10 16a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zm-4-2.243a1 1 0 111.414 1.414L6.172 16.5a1 1 0 11-1.414-1.414l.758-.758zM4 10a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm2.243-5.757a1 1 0 011-1.414l.758.757a1 1 0 11-1.414 1.414l-.757-.757z" clip-rule="evenodd"></path></svg>
+            <!-- Moon Icon -->
+            <svg id="moon-icon" class="w-4 h-4 text-zinc-100 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+          </div>
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN DASHBOARD CONTENT (Wide Canvas Layout) -->
+    <main class="flex-grow p-6 md:p-8 overflow-y-auto min-w-0 flex flex-col justify-between pb-12">
+      
+      <!-- DASHBOARD / HOME SCREEN (Landscape layout structure) -->
+      <section id="screen-dashboard" class="space-y-6 pop-scale">
+        <!-- Top Row: Welcome & Dynamic Arena Hero -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          <!-- Hero Banner Card (Span 2 for wider screens) -->
+          <div class="bg-neoPurple text-white p-6 rounded-2xl border-4 border-black shadow-brutal relative overflow-hidden lg:col-span-2 flex flex-col justify-between min-h-[220px]">
+            <div class="absolute -right-6 -bottom-6 opacity-25 transform rotate-12">
+              <svg class="w-48 h-48" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm0 3.99L19.53 19H4.47L12 5.99z"></path></svg>
+            </div>
+            <div>
+              <span class="bg-black text-neoGreen font-black text-xs px-3 py-1 rounded-full border-2 border-black tracking-wider uppercase">Active Arena Event</span>
+              <h2 class="font-display font-black text-3xl mt-4 leading-none uppercase">Defeat the Ambiguity Behemoth!</h2>
+              <p class="text-sm text-purple-100 mt-2 max-w-[80%]">Slay 10 vocabulary and syntax challenges asynchronously alongside your guild squad to boost cumulative multiplier rankings.</p>
+            </div>
+            
+            <div>
+              <button onclick="startArenaRun()" class="bg-neoGreen text-black font-black px-6 py-3 rounded-xl border-2 border-black shadow-brutal-sm hover:translate-y-0.5 hover:shadow-none active:translate-y-1 transition-all flex items-center gap-2">
+                ENTER SHUFFLED ARENA 🔥
+              </button>
+            </div>
+          </div>
+
+          <!-- Level Progress Card -->
+          <div class="bg-lightCard dark:bg-darkCard p-6 rounded-2xl border-4 border-black shadow-brutal flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-black uppercase text-zinc-500">YOUR MASTERY</span>
+                <span class="text-xs bg-neoPurple/20 text-neoPurple px-2 py-0.5 rounded font-black border border-neoPurple">RANK #4</span>
+              </div>
+              <div class="flex items-baseline gap-1 mt-2">
+                <span id="stat-level" class="text-4xl font-display font-black text-neoPurple">Lvl 3</span>
+                <span class="text-xs text-zinc-400 font-bold">"Vocab Overlord"</span>
+              </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div>
+              <div class="w-full bg-zinc-200 dark:bg-zinc-800 h-4 rounded-full border-2 border-black overflow-hidden">
+                <div id="level-progress" class="bg-neoPurple h-full transition-all" style="width: 45%;"></div>
+              </div>
+              <div class="flex justify-between items-center text-xs text-zinc-400 mt-2">
+                <span>XP: <span id="stat-xp">145</span> / 300</span>
+                <span>45% to next level</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Row: Social Feed and Guild Aura side-by-side -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          <!-- Study Guild Chat Feed (Span 2) -->
+          <div class="bg-lightCard dark:bg-darkCard p-6 rounded-2xl border-4 border-black shadow-brutal lg:col-span-2 space-y-4">
+            <div class="flex items-center justify-between border-b-4 border-black pb-3">
+              <h3 class="font-display font-black text-md uppercase flex items-center gap-2">
+                <span>👥</span> GUILD INTEL & DIALOGUES
+              </h3>
+              <span class="text-xs bg-neoCyan/20 text-neoCyan px-3 py-1 rounded-full border-2 border-black font-black uppercase">THE NOUN NINJAS</span>
+            </div>
+            
+            <!-- Horizontal-aligned feeds on laptop, stacking on smaller sizes -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="bg-zinc-100 dark:bg-zinc-800/50 p-4 rounded-xl border-2 border-black flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between font-bold text-zinc-500 mb-2">
+                    <span class="text-neoPurple">@AlexTheAlpha</span>
+                    <span class="text-[10px] text-zinc-400">2h ago</span>
+                  </div>
+                  <p class="text-xs italic text-zinc-700 dark:text-zinc-300">"Remember, guys: 'Capricious' means unpredictable! Just think about capricious weather conditions."</p>
+                </div>
+                <div class="mt-3 pt-2 border-t border-zinc-200 dark:border-zinc-800 flex items-center gap-2">
+                  <span class="text-[10px] bg-neoGreen/20 text-neoGreen font-bold px-2 py-0.5 rounded border border-neoGreen">+50 Aura awarded</span>
+                </div>
+              </div>
+
+              <div class="bg-zinc-100 dark:bg-zinc-800/50 p-4 rounded-xl border-2 border-black flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between font-bold text-zinc-500 mb-2">
+                    <span class="text-neoPink">@Taylor_Saves</span>
+                    <span class="text-[10px] text-zinc-400">5h ago</span>
+                  </div>
+                  <p class="text-xs italic text-zinc-700 dark:text-zinc-300">"Who wants to run a joint Bridge Builders dungeon study hour today at 7 PM EST? We need 2 more savy linguists."</p>
+                </div>
+                <div class="mt-3 pt-2 border-t border-zinc-200 dark:border-zinc-800 flex items-center">
+                  <span class="text-[10px] text-zinc-400 font-bold">1 reply · Active</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stats Rep & Boost Card -->
+          <div class="bg-lightCard dark:bg-darkCard p-6 rounded-2xl border-4 border-black shadow-brutal flex flex-col justify-between">
+            <div>
+              <span class="text-xs font-black uppercase text-zinc-500">Guild Reputation</span>
+              <div class="flex items-baseline gap-1 mt-2">
+                <span id="stat-aura" class="text-4xl font-display font-black text-neoPink">+750</span>
+                <span class="text-xs text-zinc-400 font-bold">AURA</span>
+              </div>
+              <p class="text-xs text-zinc-500 mt-3 leading-relaxed">Your peer explanations boosted 15 teammates' scores this week alone! High reputation increases study multipliers.</p>
+            </div>
+            
+            <div class="pt-4 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-between text-xs text-zinc-400">
+              <span>Next Aura Milestone:</span>
+              <span class="font-bold text-neoPink">1,000 AP</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- QUEST ARENA SCREEN (Landscape Split Layout mimicking professional testing systems) -->
+      <section id="screen-arena" class="hidden space-y-6 pop-scale">
+        <!-- Progress Bar & Actions Row -->
+        <div class="flex items-center justify-between bg-zinc-100 dark:bg-zinc-800/50 p-3 rounded-xl border-2 border-black">
+          <button onclick="switchScreen('dashboard')" class="bg-zinc-200 dark:bg-zinc-800 px-4 py-2 rounded-xl border-2 border-black shadow-brutal-sm text-xs font-black hover:translate-y-0.5 active:translate-y-1 transition-all">
+            ◀ LEAVE TRAINING SQUAD
+          </button>
+          
+          <div class="flex items-center gap-4">
+            <span class="text-xs font-black text-zinc-400 hidden sm:inline">Linguist Battleground</span>
+            <div class="w-24 sm:w-36 bg-zinc-300 dark:bg-zinc-700 h-3 rounded-full overflow-hidden border border-black">
+              <div id="quest-stage-bar" class="bg-neoPurple h-full transition-all" style="width: 10%;"></div>
+            </div>
+            <span id="question-progress-num" class="text-xs font-black bg-neoPurple text-white px-2 py-0.5 rounded border border-black">1/10</span>
+          </div>
+        </div>
+
+        <!-- 2-COLUMN SPLIT LANDSCAPE LAYOUT -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+          
+          <!-- LEFT PANEL: Passage text & Prompt (Interactive Paper) -->
+          <div id="question-box" class="bg-lightCard dark:bg-darkCard p-6 rounded-2xl border-4 border-black shadow-brutal min-h-[420px] flex flex-col justify-between">
+            <div class="relative">
+              <!-- Mode Tag -->
+              <div class="inline-block bg-neoPink text-black font-black text-xs px-3 py-1 rounded-md border-2 border-black shadow-brutal-sm mb-4">
+                BLUEBOOK COGNITIVE ENCOUNTER
+              </div>
+
+              <h3 class="font-display font-extrabold text-sm uppercase text-neoPurple mb-2 tracking-widest">Passage Stimulus:</h3>
+              <p id="question-text" class="text-sm md:text-base leading-relaxed font-medium text-zinc-800 dark:text-zinc-200 mb-6 bg-zinc-50 dark:bg-zinc-900/40 p-4 rounded-xl border-2 border-dashed border-zinc-300 dark:border-zinc-700">
+                <!-- Dynamically populated passage -->
+              </p>
+            </div>
+
+            <div class="mt-4 pt-4 border-t-2 border-zinc-200 dark:border-zinc-800">
+              <span class="text-xs font-black uppercase text-zinc-400">CRITICAL OBJECTIVE:</span>
+              <p id="question-prompt" class="font-bold text-sm md:text-base mt-1 text-zinc-900 dark:text-zinc-100">
+                <!-- Dynamically populated prompt question -->
+              </p>
+            </div>
+          </div>
+
+          <!-- RIGHT PANEL: Multiple Choice & Instant Oracle Explanation Cards -->
+          <div class="space-y-6">
+            <!-- Multiple Choice Grid -->
+            <div class="space-y-3">
+              <span class="text-xs font-black uppercase text-zinc-400 tracking-wider">CHOOSE YOUR ANALYSIS VECTOR:</span>
+              <div id="options-grid" class="space-y-3">
+                <!-- Dynamically populated buttons -->
+              </div>
+            </div>
+
+            <!-- Dynamic Feedback Panel (Sliding Card underneath choices or taking its place) -->
+            <div id="feedback-card" class="hidden bg-lightCard dark:bg-darkCard p-6 rounded-2xl border-4 border-black shadow-brutal-neon pop-scale space-y-4">
+              <div class="flex items-center justify-between">
+                <h4 id="feedback-title" class="font-display font-black text-lg uppercase tracking-tight">
+                  <!-- Dynamic Title -->
+                </h4>
+                <span id="xp-feedback-badge" class="font-black text-xs px-3 py-1 rounded border-2 border-black">
+                  <!-- XP Award -->
+                </span>
+              </div>
+
+              <div class="text-sm text-zinc-700 dark:text-zinc-300 space-y-3">
+                <div class="bg-zinc-100 dark:bg-zinc-800/60 p-3 rounded-lg border">
+                  <span class="font-black text-neoPurple uppercase text-xs block mb-1">CORRECT RULE LOGIC:</span>
+                  <p id="feedback-reasoning" class="text-xs md:text-sm"></p>
+                </div>
+                
+                <div id="feedback-distractor-container" class="bg-zinc-100 dark:bg-zinc-800/60 p-3 rounded-lg border">
+                  <span class="font-black text-neoPink uppercase text-xs block mb-1">TRAP BLUEPRINT:</span>
+                  <p id="feedback-distractor" class="text-xs md:text-sm italic"></p>
+                </div>
+              </div>
+
+              <!-- Next Button -->
+              <button id="next-question-btn" onclick="nextQuestion()" class="w-full bg-neoPurple hover:bg-purple-600 text-white font-black py-4 rounded-xl border-2 border-black shadow-brutal-sm hover:translate-y-0.5 active:translate-y-1 transition-all">
+                ADVANCE DEEPER INTO ARENA ➔
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- LEADERBOARD & GUILD STATS SCREEN -->
+      <section id="screen-leaderboard" class="hidden space-y-6 pop-scale">
+        <div class="border-b-4 border-black pb-4">
+          <h2 class="font-display font-black text-3xl uppercase tracking-tight">🏆 COOPERATIVE GUILD RANKS</h2>
+          <p class="text-xs text-zinc-500">Track current status of active cohort guilds battle metrics.</p>
+        </div>
+
+        <!-- Landscape Leaderboard Layout: Split in 2 panels -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Leaderboard table taking 2 cols -->
+          <div class="bg-lightCard dark:bg-darkCard p-6 rounded-2xl border-4 border-black shadow-brutal md:col-span-2 space-y-4">
+            <span class="text-xs font-black uppercase text-zinc-400">Current Arena Leaders</span>
+            
+            <div class="space-y-3">
+              <!-- Row 1 (Current User Guild) -->
+              <div class="flex items-center justify-between p-4 bg-neoPurple/20 dark:bg-neoPurple/10 border-4 border-black rounded-xl">
+                <div class="flex items-center gap-4">
+                  <span class="font-display font-black text-2xl text-neoPurple">#1</span>
+                  <div>
+                    <h4 class="font-black text-md">The Noun Ninjas</h4>
+                    <p class="text-xs text-zinc-500">Your current cohort guild</p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <span class="font-display font-black text-lg text-neoPurple">42,890 XP</span>
+                  <span class="block text-[10px] font-bold text-neoGreen">Active Multiplier 2.5x</span>
+                </div>
+              </div>
+
+              <!-- Row 2 -->
+              <div class="flex items-center justify-between p-4 border-2 border-black rounded-xl bg-zinc-50 dark:bg-zinc-800/40">
+                <div class="flex items-center gap-4">
+                  <span class="font-display font-black text-xl text-zinc-400">#2</span>
+                  <div>
+                    <h4 class="font-black text-md">The Verbivores</h4>
+                    <p class="text-xs text-zinc-500">Grammar Overlords Squad</p>
+                  </div>
+                </div>
+                <span class="font-display font-bold text-md">39,450 XP</span>
+              </div>
+
+              <!-- Row 3 -->
+              <div class="flex items-center justify-between p-4 border-2 border-black rounded-xl bg-zinc-50 dark:bg-zinc-800/40">
+                <div class="flex items-center gap-4">
+                  <span class="font-display font-black text-xl text-zinc-400">#3</span>
+                  <div>
+                    <h4 class="font-black text-md">Syntax Slayers</h4>
+                    <p class="text-xs text-zinc-500">Aura focused contributors</p>
+                  </div>
+                </div>
+                <span class="font-display font-bold text-md">31,200 XP</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Guild Quest Info card on side -->
+          <div class="bg-neoPink/10 text-neoPink border-4 border-neoPink p-6 rounded-2xl flex flex-col justify-between">
+            <div class="space-y-3">
+              <span class="font-black block uppercase text-xs tracking-wider">AURA AND COOPERATIVE RANKS</span>
+              <p class="text-sm leading-relaxed">
+                We reward peer cooperation! Writing intuitive, modern breakdown summaries of grammar rules for your study guild mates directly multiplies cumulative XP multipliers.
+              </p>
+              <p class="text-xs italic">
+                Each correct answer adds raw XP. The absolute fastest way to boost ranks is to maintain the streak.
+              </p>
+            </div>
+            
+            <div class="pt-4 border-t border-neoPink/20 text-xs font-black">
+              WEEKLY SEASON CLOSES: 2D 4H
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SKILL MAP / DIAGNOSTIC PROGRESS SCREEN -->
+      <section id="screen-stats" class="hidden space-y-6 pop-scale">
+        <div class="border-b-4 border-black pb-4">
+          <h2 class="font-display font-black text-3xl uppercase tracking-tight">🗺️ YOUR PURIFICATION TREE</h2>
+          <p class="text-xs text-zinc-500">Track and master major high-yield Digital SAT domains.</p>
+        </div>
+
+        <!-- Adaptive Progression Map Grid in wide view -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Node 1 -->
+          <div class="bg-lightCard dark:bg-darkCard p-5 rounded-2xl border-4 border-black shadow-brutal flex flex-col justify-between min-h-[180px]">
+            <div>
+              <span class="text-xs font-black text-zinc-400">DOMAIN 01</span>
+              <h4 class="font-display font-black text-md text-neoPurple mt-1 uppercase">Lexis Catalyst</h4>
+              <p class="text-xs text-zinc-500 mt-2">Vocabulary-in-Context questions.</p>
+            </div>
+            <div class="mt-4">
+              <div class="flex justify-between text-xs font-black mb-1">
+                <span class="text-neoPurple">75% MASTERED</span>
+                <span>3/4 Nodes</span>
+              </div>
+              <div class="w-full bg-zinc-200 dark:bg-zinc-800 h-2.5 rounded-full border border-black overflow-hidden">
+                <div class="bg-neoPurple h-full" style="width: 75%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Node 2 -->
+          <div class="bg-lightCard dark:bg-darkCard p-5 rounded-2xl border-4 border-black shadow-brutal flex flex-col justify-between min-h-[180px]">
+            <div>
+              <span class="text-xs font-black text-zinc-400">DOMAIN 02</span>
+              <h4 class="font-display font-black text-md text-neoGreen mt-1 uppercase">Bridge Builders</h4>
+              <p class="text-xs text-zinc-500 mt-2">Transitions & Rhetorical synthesis links.</p>
+            </div>
+            <div class="mt-4">
+              <div class="flex justify-between text-xs font-black mb-1">
+                <span class="text-neoGreen">40% MASTERED</span>
+                <span>2/5 Nodes</span>
+              </div>
+              <div class="w-full bg-zinc-200 dark:bg-zinc-800 h-2.5 rounded-full border border-black overflow-hidden">
+                <div class="bg-neoGreen h-full" style="width: 40%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Node 3 -->
+          <div class="bg-lightCard dark:bg-darkCard p-5 rounded-2xl border-4 border-black shadow-brutal flex flex-col justify-between min-h-[180px]">
+            <div>
+              <span class="text-xs font-black text-zinc-400">DOMAIN 03</span>
+              <h4 class="font-display font-black text-md text-neoPink mt-1 uppercase">Syntax Shield</h4>
+              <p class="text-xs text-zinc-500 mt-2">Grammar rules, punctuation, and modifiers.</p>
+            </div>
+            <div class="mt-4">
+              <div class="flex justify-between text-xs font-black mb-1">
+                <span class="text-neoPink">15% MASTERED</span>
+                <span>1/6 Nodes</span>
+              </div>
+              <div class="w-full bg-zinc-200 dark:bg-zinc-800 h-2.5 rounded-full border border-black overflow-hidden">
+                <div class="bg-neoPink h-full" style="width: 15%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Node 4 -->
+          <div class="bg-lightCard dark:bg-darkCard p-5 rounded-2xl border-4 border-black shadow-brutal flex flex-col justify-between min-h-[180px] opacity-60 relative">
+            <div class="absolute inset-0 bg-black/10 dark:bg-black/40 rounded-xl flex items-center justify-center">
+              <span class="bg-black text-white text-xs font-black px-3 py-1.5 rounded border-2 border-white tracking-widest">LOCKED (LVL 5)</span>
+            </div>
+            <div>
+              <span class="text-xs font-black text-zinc-400">DOMAIN 04</span>
+              <h4 class="font-display font-black text-md text-neoCyan mt-1 uppercase">The Crucible</h4>
+              <p class="text-xs text-zinc-500 mt-2">Advanced command of evidence arguments.</p>
+            </div>
+            <div class="mt-4">
+              <div class="flex justify-between text-xs font-black mb-1">
+                <span class="text-neoCyan">0% MASTERED</span>
+                <span>0/8 Nodes</span>
+              </div>
+              <div class="w-full bg-zinc-200 dark:bg-zinc-800 h-2.5 rounded-full border border-black overflow-hidden">
+                <div class="bg-neoCyan h-full" style="width: 0%;"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- PLAYABLE PROTOTYPE CORE JAVASCRIPT -->
+  <script>
+    // --- AUTHENTIC SAT VOCAB & TRANSITION QUESTION BANK (BLUEBOOK INSPIRED) ---
+    const originalQuestions = [
+      {
+        passage: "For millions of years, the Tyrannosaurus rex reigned as a top predator. However, because fossils are relatively rare, researchers must draw conclusions from a highly ________ fossil record, leading to ongoing debates about the dinosaur’s behavior and metabolism.",
+        prompt: "Which choice completes the text with the most logical and precise word? (Adapted from Bluebook practice patterns)",
+        options: [
+          { text: "sparse", correct: true, trap: "Correct. 'Sparse' means thinly dispersed or scattered, which directly fits the premise of fossils being relatively rare." },
+          { text: "comprehensive", correct: false, trap: "Trap! 'Comprehensive' means complete, which contradicts the fact that the fossils are relatively rare." },
+          { text: "antiquated", correct: false, trap: "Antiquated means outdated. While the fossil record is ancient, the text focuses on physical scarcity, not age." },
+          { text: "robust", correct: false, trap: "Robust means healthy/strong or extensive. This is the opposite of rare and limited." }
+        ],
+        explanation: "The passage sets up a contrast using 'However' and notes that fossils are 'relatively rare'. Therefore, the fossil record must be 'sparse' (thin or scarce).",
+        distractorExplanation: "Watch out for 'robust' or 'comprehensive'. They imply a full set of evidence, which directly conflicts with the rarity mentioned."
+      },
+      {
+        passage: "Geologists studying the Cascade Range have identified several active volcanic systems capable of producing large eruptions. ________, they have established monitoring stations equipped with seismometers and GPS receivers to track subsurface magma movement.",
+        prompt: "Which choice completes the text with the most logical transition? (Adapted from Bluebook practice patterns)",
+        options: [
+          { text: "Consequently", correct: true, trap: "Correct. 'Consequently' establishes a clear cause-and-effect link between finding active volcanoes and establishing monitoring stations." },
+          { text: "Nevertheless", correct: false, trap: "Nevertheless suggests contrast. However, monitoring is a logical outcome of finding active volcanoes, not a contradiction." },
+          { text: "On the contrary", correct: false, trap: "On the contrary introduces an opposite assertion, which is not the case here." },
+          { text: "In other words", correct: false, trap: "In other words is used for simplification or restatement. Setting up stations is a physical consequence, not a restatement." }
+        ],
+        explanation: "Identifying active volcanic systems is the cause; establishing monitoring systems to track magma is the direct effect. 'Consequently' is the most precise transition.",
+        distractorExplanation: "Do not choose 'Nevertheless' as there is no contrasting relationship between discovering hazards and monitoring them."
+      },
+      {
+        passage: "In 1913, Swedish engineer Gideon Sundback patented the modern zipper, a design that represented a major improvement over earlier fastening ________ Sundback's innovation utilized interlocking metal teeth that could be joined or separated by a sliding channel.",
+        prompt: "Which choice completes the text so that it conforms to the conventions of Standard English? (Adapted from Bluebook practice patterns)",
+        options: [
+          { text: "devices; Sundback's", correct: true, trap: "Correct. A semicolon cleanly connects two independent, closely related clauses without a coordinating conjunction." },
+          { text: "devices, Sundback's", correct: false, trap: "Trap! This creates a comma splice. You cannot join two independent clauses with only a comma." },
+          { text: "devices Sundback's", correct: false, trap: "This creates a run-on sentence, offering no boundary punctuation at all." },
+          { text: "devices and Sundback's", correct: false, trap: "While 'and' can link clauses, omitting a preceding comma here makes the coordination structurally weak." }
+        ],
+        explanation: "The text contains two independent clauses. The first ends with 'devices' and the second begins with 'Sundback's'. A semicolon is the standard punctuation mark to split them.",
+        distractorExplanation: "Watch out for option B. Comma splices are one of the most common and heavily tested traps on the Digital SAT."
+      },
+      {
+        passage: "While researching a novel, a writer noted the following details:\n• Mary Shelley published Frankenstein anonymously in 1818.\n• Many readers initially assumed her husband, Percy Bysshe Shelley, wrote it.\n• The 1823 edition was published under Mary Shelley's name to clarify authorship.",
+        prompt: "The writer wants to emphasize why the 1823 edition was published under Mary Shelley's name. Which choice most effectively uses information from the notes to accomplish this? (Adapted from Bluebook practice patterns)",
+        options: [
+          { text: "Because many readers originally believed Percy Bysshe Shelley wrote Frankenstein, the 1823 edition was published under Mary Shelley’s name to clarify that she was the author.", correct: true, trap: "Correct. This directly connects the reason (readers assuming Percy wrote it) to the effect (using her name to clarify authorship)." },
+          { text: "Published in 1823, the second edition of Frankenstein was the first to feature Mary Shelley’s name on the title page.", correct: false, trap: "This is a true statement, but it fails to state the reason *why* (authorship confusion) her name was added." },
+          { text: "Although Frankenstein was first published anonymously in 1818, it was republished five years later.", correct: false, trap: "This focuses purely on dates and anonymity, entirely missing the core objective of clarifying authorship." },
+          { text: "Percy Bysshe Shelley was widely assumed to be the author of Frankenstein until the 1823 edition was released.", correct: false, trap: "This explains the confusion but fails to state how or why the 1823 edition solved it." }
+        ],
+        explanation: "The question specifically asks to emphasize *why* her name was added in 1823. Mentioning the confusion surrounding Percy Bysshe Shelley provides this essential context.",
+        distractorExplanation: "Always double-check the precise prompt goal. Informative but incomplete choices are common distractor formats."
+      },
+      {
+        passage: "In many of her landscape paintings, artist Georgia O'Keeffe used vibrant colors and bold, simplified shapes to evoke the dramatic scenery of New Mexico. Her representation of the desert was not meant to be a literal depiction; instead, it offered an interpretive, ________ portrayal of the southwest terrain.",
+        prompt: "Which choice completes the text with the most logical and precise word? (Adapted from Bluebook practice patterns)",
+        options: [
+          { text: "subjective", correct: true, trap: "Correct. 'Subjective' means based on or influenced by personal feelings, which fits the contrast to a 'literal depiction'." },
+          { text: "redundant", correct: false, trap: "Redundant means repetitive or unnecessary. This contradicts the positive framing of her artistic choice." },
+          { text: "superficial", correct: false, trap: "Superficial means shallow. O'Keeffe's deep, expressive art is not described as shallow." },
+          { text: "impartial", correct: false, trap: "Impartial means unbiased or neutral. Her bold colors and shapes are highly expressive and biased toward her personal perspective." }
+        ],
+        explanation: "The contrast is set up with 'not meant to be a literal depiction; instead...'. The opposite of literal/objective depiction is a 'subjective' or interpretive one.",
+        distractorExplanation: "Do not confuse 'impartial' with creative interpretation. An artistic view is inherently personal (subjective)."
+      },
+      {
+        passage: "In the 1800s, naturalists believed that deep-sea floors were entirely devoid of life due to the extreme cold, high pressure, and complete absence of sunlight. ________, the deployment of deep-sea salvage cables in the mid-nineteenth century pulled up thriving colonies of corals, clams, and other organisms.",
+        prompt: "Which choice completes the text with the most logical transition? (Adapted from Bluebook practice patterns)",
+        options: [
+          { text: "However", correct: true, trap: "Correct. 'However' introduces the counter-evidence that disproved the initial belief about deep-sea floors." },
+          { text: "Similarly", correct: false, trap: "Similarly suggests agreement, but the actual cables contradicted the belief that the deep sea was devoid of life." },
+          { text: "Furthermore", correct: false, trap: "Furthermore adds matching information. The cable discovery does not support the naturalists' dead sea belief; it destroys it." },
+          { text: "Therefore", correct: false, trap: "Therefore is cause-and-effect. Discovering deep-sea corals was not caused by scientists believing nothing could live there." }
+        ],
+        explanation: "The first sentence presents an outdated hypothesis (the deep-sea is dead). The second presents factual counter-evidence (corals were found). A contrasting transition like 'However' is mandatory.",
+        distractorExplanation: "Be careful of additive transitions like 'Furthermore'. Make sure to verify whether the text continues or changes direction."
+      },
+      {
+        passage: "In the late 1960s, a team of oceanographers led by Bruce Heezen and Marie Tharp mapped the ocean floor. Tharp’s meticulously drawn physiographic diagrams ________ the scientific community’s understanding of plate tectonics by proving the existence of the Mid-Atlantic Ridge.",
+        prompt: "Which choice completes the text so that it conforms to the conventions of Standard English? (Adapted from Bluebook practice patterns)",
+        options: [
+          { text: "revolutionized", correct: true, trap: "Correct. This is a finite past-tense verb that successfully functions as the main verb of the independent clause." },
+          { text: "revolutionizing", correct: false, trap: "Trap! Present participles ('-ing' words) cannot act as main verbs unless paired with a helping verb (e.g., 'were')." },
+          { text: "revolutionize", correct: false, trap: "Subject-verb disagreement. 'Diagrams' (plural) matches present-tense 'revolutionize', but the event occurred in the 1960s, requiring past tense." },
+          { text: "to revolutionize", correct: false, trap: "An infinitive ('to verb') cannot act as the main conjugated verb of a sentence." }
+        ],
+        explanation: "Since the subject is 'Tharp’s meticulously drawn physiographic diagrams' and the timeframe is the late 1960s, we need a past-tense verb to serve as the predicate. 'Revolutionized' fits.",
+        distractorExplanation: "The SAT heavily tests fragment structures using participles like 'revolutionizing' to trick you into overlooking the lack of a main verb."
+      },
+      {
+        passage: "The success of a public transit system relies heavily on accessibility. When bus stops and train stations are situated in distant or poorly illuminated areas, commuting becomes challenging, thereby ________ the system's overall utility for many residents.",
+        prompt: "Which choice completes the text with the most logical and precise word? (Adapted from Bluebook practice patterns)",
+        options: [
+          { text: "compromising", correct: true, trap: "Correct. 'Compromising' here means weakening or damaging, which perfectly aligns with challenging commutes reducing the system's usefulness." },
+          { text: "enhancing", correct: false, trap: "Enhancing means improving. Poorly lit or distant stops would reduce, not improve, utility." },
+          { text: "stimulating", correct: false, trap: "Stimulating means exciting or encouraging. Making commuting difficult does not encourage transit use." },
+          { text: "projecting", correct: false, trap: "Projecting means estimating or displaying. It does not fit the context of affecting utility." }
+        ],
+        explanation: "If bus stops are distant or dark, commuting is hard, which has a negative effect. 'Compromising' the utility means reducing its effectiveness or safety.",
+        distractorExplanation: "Choose words that match the logical direction (+/-) of the context. 'Compromising' is the only negative word that fits."
+      },
+      {
+        passage: "As a dancer, Josephine Baker captivated European audiences with her energetic, expressive performances. ________, Baker served as a sublieutenant in the Free French Forces during World War II, utilizing her fame to gather intelligence for the resistance.",
+        prompt: "Which choice completes the text with the most logical transition? (Adapted from Bluebook practice patterns)",
+        options: [
+          { text: "Additionally", correct: true, trap: "Correct. 'Additionally' introduces a separate, noteworthy accomplishment that builds upon her fame as a dancer." },
+          { text: "Conversely", correct: false, trap: "Conversely suggests a complete contradiction. Being a resistance spy does not contradict being an expressive dancer." },
+          { text: "Rather", correct: false, trap: "Rather introduces an alternative. Her military career was an addition to her career, not a substitute for dancing." },
+          { text: "Initially", correct: false, trap: "Initially implies a chronological start. Baker was a dancer first, then a spy, so her spy service was not her initial phase." }
+        ],
+        explanation: "The text adds another layer to Baker's legacy: first, her dancing career; second, her heroic espionage. An additive transition like 'Additionally' is perfect.",
+        distractorExplanation: "Do not use chronological terms like 'Initially' unless the sequence of events strictly supports a primary starting point."
+      },
+      {
+        passage: "Dating back to the Mesozoic era, ________ by paleontologists in southern Argentina, revealing crucial insights into the gigantism of titanosaur species.",
+        prompt: "Which choice completes the text so that it conforms to the conventions of Standard English? (Adapted from Bluebook practice patterns)",
+        options: [
+          { text: "a massive fossilized femur was recently excavated", correct: true, trap: "Correct. The introductory modifying phrase 'Dating back to the Mesozoic era' must modify the subject that follows immediately, which is the femur itself." },
+          { text: "paleontologists recently excavated a massive fossilized femur", correct: false, trap: "Trap! This implies the paleontologists themselves date back to the Mesozoic era, which is logically impossible." },
+          { text: "the excavation of a massive fossilized femur was completed", correct: false, trap: "This makes the action of 'the excavation' date back to the Mesozoic era, rather than the fossil itself." },
+          { text: "southern Argentina was the site where paleontologists excavated a massive femur", correct: false, trap: "This suggests that the landmass of southern Argentina itself dates back only to the Mesozoic era." }
+        ],
+        explanation: "This is a dangling modifier question. The opening modifier is 'Dating back to the Mesozoic era'. The noun that directly follows the comma must be the thing that dates back to that era: the fossilized femur.",
+        distractorExplanation: "Always ask yourself: 'Who or what is performing or described by the introductory modifier?' This prevents falling for modifier placement traps."
+      }
+    ];
+
+    let questions = [];
+    let currentQuestionIndex = 0;
+    let userScore = 0;
+    let userStreak = 5;
+    let userXP = 145;
+    let userLevel = 3;
+    let selectedOptionIndex = null;
+
+    // Helper function to shuffle array items randomly (Fisher-Yates)
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // Prepare and shuffle the questions
+    function startArenaRun() {
+      // Create deep copy of questions to protect original data
+      questions = JSON.parse(JSON.stringify(originalQuestions));
+      
+      // 1. Shuffle the question pool itself
+      shuffleArray(questions);
+      
+      // 2. Shuffle options within each question to avoid predictable choice patterns
+      questions.forEach(q => {
+        shuffleArray(q.options);
+      });
+
+      // Reset state for new session
+      currentQuestionIndex = 0;
+      userScore = 0;
+      
+      // Move to Arena UI
+      switchScreen('arena');
+    }
+
+    // UI Screen Navigation Engine
+    function switchScreen(screenId) {
+      // Hide all screens
+      document.getElementById('screen-dashboard').classList.add('hidden');
+      document.getElementById('screen-arena').classList.add('hidden');
+      document.getElementById('screen-leaderboard').classList.add('hidden');
+      document.getElementById('screen-stats').classList.add('hidden');
+
+      // Show active screen
+      document.getElementById(`screen-${screenId}`).classList.remove('hidden');
+
+      // Update Navigation Sidebar Button Highlight Style
+      const screens = ['dashboard', 'arena', 'leaderboard', 'stats'];
+      screens.forEach(id => {
+        const btn = document.getElementById(`nav-btn-${id}`);
+        if (id === screenId) {
+          btn.className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl border-2 border-black bg-neoPurple text-white shadow-brutal-sm transition-all font-black uppercase text-sm";
+        } else {
+          btn.className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl border-2 border-transparent text-zinc-500 dark:text-zinc-400 hover:border-black hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all font-black uppercase text-sm";
+        }
+      });
+
+      // Automated setup trigger
+      if (screenId === 'arena' && questions.length === 0) {
+        startArenaRun();
+      } else if (screenId === 'arena') {
+        renderQuestion();
+      }
+    }
+
+    // Load and Render Current SAT Question
+    function renderQuestion() {
+      if (questions.length === 0) {
+        startArenaRun();
+        return;
+      }
+      
+      const q = questions[currentQuestionIndex];
+      
+      // Update step progress
+      document.getElementById('question-progress-num').textContent = `${currentQuestionIndex + 1}/${questions.length}`;
+      const progressPercent = ((currentQuestionIndex + 1) / questions.length) * 100;
+      document.getElementById('quest-stage-bar').style.width = `${progressPercent}%`;
+
+      // Highlight blank spaces to simulate digital exam layout
+      document.getElementById('question-text').innerHTML = q.passage.replace("________", "<span class='bg-neoPurple/20 dark:bg-neoPurple/30 text-neoPurple border border-neoPurple px-2 py-0.5 font-extrabold rounded inline-block my-1'>________</span>").replace(/\n/g, "<br>");
+      document.getElementById('question-prompt').textContent = q.prompt;
+
+      // Reset Feedback Panel
+      document.getElementById('feedback-card').classList.add('hidden');
+      selectedOptionIndex = null;
+
+      // Populate Choices Grid
+      const grid = document.getElementById('options-grid');
+      grid.innerHTML = '';
+      
+      q.options.forEach((option, index) => {
+        const optionBtn = document.createElement('button');
+        optionBtn.className = "w-full text-left p-4 rounded-xl border-4 border-black dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-850 font-bold hover:translate-y-0.5 active:translate-y-1 hover:border-black dark:hover:border-zinc-400 transition-all shadow-brutal-sm flex items-center justify-between group";
+        optionBtn.innerHTML = `
+          <span><span class="text-neoPurple mr-2 uppercase text-xs border-2 border-black dark:border-zinc-700 px-2 py-0.5 rounded bg-white dark:bg-zinc-900">${String.fromCharCode(65 + index)}</span> ${option.text}</span>
+          <span class="hidden group-hover:block text-xs text-zinc-400">ANALYZING VECTOR ➔</span>
+        `;
+        optionBtn.onclick = () => selectOption(index, optionBtn);
+        grid.appendChild(optionBtn);
+      });
+    }
+
+    // Option Selected Interaction Logic
+    function selectOption(index, btnElement) {
+      if (selectedOptionIndex !== null) return; // Prevent clicking multiple times
+      
+      selectedOptionIndex = index;
+      const q = questions[currentQuestionIndex];
+      const selectedOption = q.options[index];
+
+      // Disable other choices, highlight correct/incorrect
+      const optionButtons = document.getElementById('options-grid').children;
+      for (let i = 0; i < optionButtons.length; i++) {
+        optionButtons[i].classList.remove('hover:translate-y-0.5', 'active:translate-y-1', 'shadow-brutal-sm');
+        if (q.options[i].correct) {
+          optionButtons[i].className = "w-full text-left p-4 rounded-xl border-4 border-neoGreen bg-neoGreen/10 text-neoGreen font-bold transition-all shadow-brutal flex items-center justify-between";
+          optionButtons[i].innerHTML = `
+            <span><span class="text-white mr-2 uppercase text-xs border-2 border-neoGreen px-2 py-0.5 rounded bg-neoGreen">${String.fromCharCode(65 + i)}</span> ${q.options[i].text}</span>
+            <span class="text-xs font-black">🎯 TARGET ACQUIRED</span>
+          `;
+        } else if (i === index) {
+          // If clicked wrong
+          optionButtons[i].className = "w-full text-left p-4 rounded-xl border-4 border-neoPink bg-neoPink/10 text-neoPink font-bold transition-all shadow-brutal shake flex items-center justify-between";
+          optionButtons[i].innerHTML = `
+            <span><span class="text-white mr-2 uppercase text-xs border-2 border-neoPink px-2 py-0.5 rounded bg-neoPink">${String.fromCharCode(65 + i)}</span> ${q.options[i].text}</span>
+            <span class="text-xs font-black">❌ AMBIGUITY TRIGGERED</span>
+          `;
+        } else {
+          optionButtons[i].classList.add('opacity-40');
+        }
+      }
+
+      // Handle scoring and XP adjustments
+      if (selectedOption.correct) {
+        userXP += 35;
+        userScore += 1;
+        document.getElementById('xp-feedback-badge').textContent = "+35 XP";
+        document.getElementById('xp-feedback-badge').className = "bg-neoGreen text-black font-black text-xs px-2.5 py-0.5 rounded border-2 border-black shadow-brutal-sm";
+        document.getElementById('feedback-title').textContent = "🎯 TARGET HIT!";
+        document.getElementById('feedback-title').className = "font-display font-black text-lg uppercase text-neoGreen";
+      } else {
+        userXP += 5; // Minimal pity XP
+        document.getElementById('xp-feedback-badge').textContent = "+5 XP";
+        document.getElementById('xp-feedback-badge').className = "bg-neoPink text-white font-black text-xs px-2.5 py-0.5 rounded border-2 border-black shadow-brutal-sm";
+        document.getElementById('feedback-title').textContent = "🛡️ TRAP TRIGGERED!";
+        document.getElementById('feedback-title').className = "font-display font-black text-lg uppercase text-neoPink";
+      }
+
+      // Populate Diagnostic Explanations
+      document.getElementById('feedback-reasoning').textContent = q.explanation;
+      document.getElementById('feedback-distractor').textContent = selectedOption.trap;
+
+      // Reveal Explanations Panel
+      const feedbackCard = document.getElementById('feedback-card');
+      feedbackCard.classList.remove('hidden');
+      feedbackCard.scrollIntoView({ behavior: 'smooth' });
+
+      // Update Dashboard Indicators in memory
+      updateProgressIndicators();
+    }
+
+    // Go to Next Question or Complete Quest Loop
+    function nextQuestion() {
+      currentQuestionIndex++;
+      if (currentQuestionIndex < questions.length) {
+        renderQuestion();
+      } else {
+        // Quest Completed Screen Reset
+        completeQuest();
+      }
+    }
+
+    // Quest finished logic
+    function completeQuest() {
+      userStreak += 1;
+      document.getElementById('streak-count').textContent = userStreak;
+      
+      // Elegant customized landscape ending layout
+      const arenaScreen = document.getElementById('screen-arena');
+      arenaScreen.innerHTML = `
+        <div class="text-center py-12 space-y-6 pop-scale max-w-xl mx-auto">
+          <div class="inline-block bg-neoPurple p-6 rounded-full border-4 border-black shadow-brutal animate-bounce">
+            👑
+          </div>
+          <div>
+            <h2 class="font-display font-black text-3xl text-neoPurple uppercase tracking-tight">ARENA SQUAD PURIFIED!</h2>
+            <p class="text-sm text-zinc-500 mt-1">You conquered all 10 Bluebook challenge nodes and saved your guild standings!</p>
+          </div>
+
+          <div class="bg-lightCard dark:bg-darkCard p-6 rounded-2xl border-4 border-black shadow-brutal text-left space-y-3">
+            <h3 class="font-display font-black uppercase text-sm border-b-2 border-zinc-200 dark:border-zinc-800 pb-2">🎯 Evaluation Summary</h3>
+            <div class="flex justify-between text-sm">
+              <span>Passage Accuracy Rate:</span>
+              <span class="font-bold">${userScore} / 10 Correct</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span>Pure Gained Experience Points:</span>
+              <span class="font-bold text-neoGreen">+${userScore * 35 + (10 - userScore) * 5} XP</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span>Guild Streak Multiplier Bonus:</span>
+              <span class="font-bold text-neoYellow">Streak Maintained (${userStreak} days)</span>
+            </div>
+          </div>
+
+          <button onclick="window.location.reload()" class="w-full bg-neoGreen text-black font-black py-4 rounded-xl border-4 border-black shadow-brutal-sm hover:translate-y-0.5 active:translate-y-1 transition-all">
+            RETURN TO DOMAIN MAP ➔
+          </button>
+        </div>
+      `;
+    }
+
+    // Refresh XP, levels and update views
+    function updateProgressIndicators() {
+      if (userXP >= 300) {
+        userLevel += 1;
+        userXP = userXP - 300;
+      }
+      document.getElementById('stat-level').textContent = `Lvl ${userLevel}`;
+      document.getElementById('stat-xp').textContent = userXP;
+      const progressPercent = (userXP / 300) * 100;
+      document.getElementById('level-progress').style.width = `${progressPercent}%`;
+    }
+
+    // --- DARK MODE / LIGHT MODE SWITCHING SYSTEM ---
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+
+    function applyTheme() {
+      const isDark = document.documentElement.classList.contains('dark');
+      if (isDark) {
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+      } else {
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+      }
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('color-theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('color-theme', 'dark');
+      }
+      applyTheme();
+    });
+
+    // Check system preferences or storage
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    applyTheme();
+
+    // Init display
+    updateProgressIndicators();
+  </script>
+</body>
+</html>
